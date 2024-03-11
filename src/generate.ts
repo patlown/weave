@@ -1,18 +1,12 @@
-import { writeFileSync } from "fs";
+import { createHyperKeyManipulator, createKarabinerRule } from "./layer";
 
-// Define the message
-const message = { message: "Hello, World!" };
+const hyperKeyRule = createKarabinerRule("Hyper Key (⌃⌥⇧⌘)", [
+  createHyperKeyManipulator(
+    "caps_lock",
+    ["left_command", "left_control", "left_option", "left_shift"],
+    "left_shift",
+    "escape",
+  ),
+]);
 
-// Function to write JSON to a file
-function generateJson(outputPath: string, data: object): void {
-  const jsonData = JSON.stringify(data, null, 2);
-  try {
-    writeFileSync(outputPath, jsonData);
-    console.log(`File has been generated at ${outputPath}`);
-  } catch (error) {
-    console.error("Failed to generate the JSON file:", error);
-  }
-}
-
-// Generate JSON file with "Hello, World!"
-generateJson("hello-world.json", message);
+console.log(JSON.stringify(hyperKeyRule, null, 2));
