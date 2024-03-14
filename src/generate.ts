@@ -1,12 +1,10 @@
-import { createHyperKeyManipulator, createKarabinerRule } from "./layer";
+import { createBasicMapManipulator, createRule } from "./rule";
 
-const hyperKeyRule = createKarabinerRule("Hyper Key (⌃⌥⇧⌘)", [
-  createHyperKeyManipulator(
-    "caps_lock",
-    ["left_command", "left_control", "left_option", "left_shift"],
-    "left_shift",
-    "escape",
-  ),
+const rulesConfig = createRule("config", [
+  createBasicMapManipulator({
+    fromKey: "caps_lock",
+    toKey: "escape",
+  }),
 ]);
 
-console.log(JSON.stringify(hyperKeyRule, null, 2));
+console.log(JSON.stringify(rulesConfig, null, 2));
